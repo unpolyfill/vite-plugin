@@ -1,12 +1,18 @@
-const dict: Record<string, string> = {
-  'resize-observer-polyfill': '@unplyfill/resize-observer-polyfill',
-};
+import url from 'node:url';
+import { Plugin } from 'vite';
 
-export function vitePlugin(): Plugin {
+export function unpolyfill(): Plugin {
+  const dict: Record<string, string> = {
+    'resize-observer-polyfill': '@unpolyfill/resize-observer-polyfill',
+  };
+
   return {
     name: 'unpolyfill',
-    resolveId: (id) => {
-      return dict[id];
+    resolveId(id) {
+      const newId = dict[id];
+      if (newId) {
+        return url.fileURLToPath(import.meta.resolve(newId));
+      }
     },
   };
 }
