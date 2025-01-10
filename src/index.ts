@@ -1,10 +1,12 @@
-export interface VitePluginOptions {
-  lastNameUpperCase?: boolean;
-}
+const dict: Record<string, string> = {
+  'resize-observer-polyfill': '@unplyfill/resize-observer-polyfill',
+};
 
-export function vitePlugin(firstName: string, lastName: string, options?: VitePluginOptions) {
-  if (options?.lastNameUpperCase) {
-    return firstName + ' ' + lastName.toLocaleUpperCase();
-  }
-  return firstName + ' ' + lastName;
+export function vitePlugin(): Plugin {
+  return {
+    name: 'unpolyfill',
+    resolveId: (id) => {
+      return dict[id];
+    },
+  };
 }
