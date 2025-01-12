@@ -1,5 +1,6 @@
 {
   "name": "@unpolyfill/vite-plugin",
+  "version": "1.0.1",
   "description": "Vite plugin to unpolyfill your code and reduce bundle size",
   "keywords": [
     "vite-plugin",
@@ -60,6 +61,5 @@
     "doc": {
       "basename": "/vite-plugin/"
     }
-  },
-  "version": "1.0.1"
+  }
 }
