@@ -1,18 +1,16 @@
-import url from 'node:url';
 import { Plugin } from 'vite';
 
-export function unpolyfill(): Plugin {
-  const dict: Record<string, string> = {
-    'resize-observer-polyfill': '@unpolyfill/resize-observer-polyfill',
-  };
-
+export default function unpolyfill(): Plugin {
   return {
     name: 'unpolyfill',
-    resolveId(id) {
-      const newId = dict[id];
-      if (newId) {
-        return url.fileURLToPath(import.meta.resolve(newId));
-      }
+    config() {
+      return {
+        resolve: {
+          alias: {
+            'resize-observer-polyfill': '@unpolyfill/resize-observer-polyfill',
+          },
+        },
+      };
     },
   };
 }
